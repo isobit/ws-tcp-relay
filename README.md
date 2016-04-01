@@ -16,3 +16,6 @@ Usage: ws-tcp-relay <tcpTargetAddress>
 
 ## WSS Support
 To use secure websockets simply specify both the `tlscert` and `tlskey` flags.
+
+## Building
+`go build ws-tcp-relay.go`

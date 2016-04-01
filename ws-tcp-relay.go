@@ -21,10 +21,8 @@ func copyWorker(dst io.Writer, src io.Reader, doneCh chan<- bool) {
 func relayHandler(ws *websocket.Conn) {
 	conn, err := net.Dial("tcp", tcpAddress)
 	if err != nil {
-		//log.Printf("[ERROR] TCP connection to %s failed\n", tcpAddress)
 		return
 	}
-	//log.Printf("[INFO] accepted connection with %s\n", conn.RemoteAddr())
 
 	doneCh := make(chan bool)
 
@@ -35,8 +33,6 @@ func relayHandler(ws *websocket.Conn) {
 	conn.Close()
 	ws.Close()
 	<-doneCh
-
-	//log.Printf("[INFO] closed connection with %s\n", conn.RemoteAddr())
 }
 
 func usage() {
@@ -50,23 +46,28 @@ func main() {
 	var port int
 	var certFile string
 	var keyFile string
+
+	flag.IntVar(&port, "p", 1337, "Port to listen on.")
 	flag.IntVar(&port, "port", 1337, "Port to listen on.")
-	flag.StringVar(&certFile, "cert", "", "TLS cert file path")
-	flag.StringVar(&keyFile, "key", "", "TLS key file path")
+	flag.StringVar(&certFile, "tlscert", "", "TLS cert file path")
+	flag.StringVar(&keyFile, "tlskey", "", "TLS key file path")
 	flag.Usage = usage;
 	flag.Parse();
+
 	tcpAddress = flag.Arg(0)
 	if tcpAddress == "" {
 		log.Fatal("no address specified")
 	}
 
-	log.Printf("[INFO] listening on port %d\n", port)
+	portString := fmt.Sprintf(":%d", port)
+
+	log.Printf("[INFO] starting server on port %d\n", port)
 	http.Handle("/", websocket.Handler(relayHandler))
 	var err error
 	if certFile != "" && keyFile != "" {
-		err = http.ListenAndServeTLS(fmt.Sprintf(":%d", port), certFile, keyFile, nil)
+		err = http.ListenAndServeTLS(portString, certFile, keyFile, nil)
 	} else {
-		err = http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+		err = http.ListenAndServe(portString, nil)
 	}
 	if err != nil {
 		log.Fatal(err)

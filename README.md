@@ -1,6 +1,9 @@
 # ws-tcp-relay
 A relay between Websocket and TCP.
 
+## Installation
+```go get -u github.com/joshglendenning/ws-tcp-relay```
+
 ## Usage
 ```
 Usage: ws-tcp-relay <tcpTargetAddress>

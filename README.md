@@ -1,5 +1,6 @@
 # ws-tcp-relay
-A relay between Websocket and TCP.
+A relay between Websocket and TCP. All messages will be copied from all 
+Websocket connections to the target TCP server, and vice-versa.
 
 ## Installation
 ```go get -u github.com/joshglendenning/ws-tcp-relay```

@@ -21,6 +21,7 @@ func copyWorker(dst io.Writer, src io.Reader, doneCh chan<- bool) {
 func relayHandler(ws *websocket.Conn) {
 	conn, err := net.Dial("tcp", tcpAddress)
 	if err != nil {
+		log.Printf("[ERROR] %v \n", err)
 		return
 	}
 
@@ -41,8 +42,6 @@ func usage() {
 }
 
 func main() {
-	log.SetFlags(0)
-
 	var port int
 	var certFile string
 	var keyFile string
@@ -56,13 +55,16 @@ func main() {
 
 	tcpAddress = flag.Arg(0)
 	if tcpAddress == "" {
-		log.Fatal("no address specified")
+		fmt.Fprintln(os.Stderr, "no address specified")
+		os.Exit(1)
 	}
 
 	portString := fmt.Sprintf(":%d", port)
 
 	log.Printf("[INFO] starting server on port %d\n", port)
+
 	http.Handle("/", websocket.Handler(relayHandler))
+
 	var err error
 	if certFile != "" && keyFile != "" {
 		err = http.ListenAndServeTLS(portString, certFile, keyFile, nil)

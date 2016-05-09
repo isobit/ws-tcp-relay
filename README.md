@@ -1,5 +1,11 @@
 # ws-tcp-relay
-A relay between Websocket and TCP.
+[![License MIT](https://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
+
+A relay between Websocket and TCP. All messages will be copied from all 
+Websocket connections to the target TCP server, and vice-versa.
+
+## Installation
+```go get -u github.com/joshglendenning/ws-tcp-relay```
 
 ## Usage
 ```
@@ -16,3 +22,6 @@ Usage: ws-tcp-relay <tcpTargetAddress>
 
 ## WSS Support
 To use secure websockets simply specify both the `tlscert` and `tlskey` flags.
+
+## Building
+`go build ws-tcp-relay.go`

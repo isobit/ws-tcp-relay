@@ -1,0 +1,8 @@
+hash: 25e9dfe48d9c291f001e8b76ff2c387427cc1e170f3d6c1299982531965f1025
+updated: 2016-08-03T14:34:29.480169718-07:00
+imports:
+- name: golang.org/x/net
+  version: 57bfaa875b96fb91b4766077f34470528d4b03e9
+  subpackages:
+  - websocket
+testImports: []

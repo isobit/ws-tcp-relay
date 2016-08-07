@@ -46,8 +46,8 @@ func main() {
 	var certFile string
 	var keyFile string
 
-	flag.IntVar(&port, "p", 1337, "Port to listen on.")
-	flag.IntVar(&port, "port", 1337, "Port to listen on.")
+	flag.IntVar(&port, "p", 4223, "Port to listen on.")
+	flag.IntVar(&port, "port", 4223, "Port to listen on.")
 	flag.StringVar(&certFile, "tlscert", "", "TLS cert file path")
 	flag.StringVar(&keyFile, "tlskey", "", "TLS key file path")
 	flag.Usage = usage;

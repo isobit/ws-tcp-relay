@@ -4,6 +4,8 @@
 A relay between Websocket and TCP. All messages will be copied from all 
 Websocket connections to the target TCP server, and vice-versa.
 
+In other words, it's [websocketd](https://github.com/joewalnes/websocketd), but for TCP connections instead of `STDIN` and `STDOUT`.
+
 ## Installation
 ```go get -u github.com/joshglendenning/ws-tcp-relay```
 

@@ -1,29 +1,31 @@
 # ws-tcp-relay
 [![License MIT](https://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
 
-A relay between Websocket and TCP. All messages will be copied from all 
-Websocket connections to the target TCP server, and vice-versa.
-
-In other words, it's [websocketd](https://github.com/joewalnes/websocketd), but for TCP connections instead of `STDIN` and `STDOUT`.
-
-## Installation
-```go get -u github.com/isobit/ws-tcp-relay```
+A relay between WebSocket clients and TCP servers. Data received from
+WebSocket clients is simply forwarded to the specified TCP server, and
+vice-versa. In other words, it's
+[websocketd](https://github.com/joewalnes/websocketd), but for TCP connections
+instead of `STDIN` and `STDOUT`.
 
 ## Usage
 ```
 Usage: ws-tcp-relay <tcpTargetAddress>
-  -p int
-        Port to listen on. (default 1337)
-  -port int
-        Port to listen on. (default 1337)
+  -p uint
+    	The port to listen on (default 4223)
+  -port uint
+    	The port to listen on (default 4223)
   -tlscert string
-        TLS cert file path
+    	TLS cert file path
   -tlskey string
-        TLS key file path
+    	TLS key file path
 ```
 
-## WSS Support
-To use secure websockets simply specify both the `tlscert` and `tlskey` flags.
+### WSS Support
+To use secure WebSockets simply specify both the `tlscert` and `tlskey` flags.
 
-## Building
-`go build ws-tcp-relay.go`
+## Installation
+```
+go get -u github.com/isobit/ws-tcp-relay
+```
+
+Binaries are also available on the [release page](https://github.com/isobit/ws-tcp-relay/releases/).

@@ -1,13 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"log"
 	"flag"
+	"fmt"
 	"io"
-	"os"
+	"log"
 	"net"
 	"net/http"
+	"os"
+
 	"golang.org/x/net/websocket"
 )
 
@@ -42,26 +43,26 @@ func usage() {
 }
 
 func main() {
-	var port int
+	var port uint
 	var certFile string
 	var keyFile string
 
-	flag.IntVar(&port, "p", 4223, "Port to listen on.")
-	flag.IntVar(&port, "port", 4223, "Port to listen on.")
+	flag.UintVar(&port, "p", 4223, "The port to listen on")
+	flag.UintVar(&port, "port", 4223, "The port to listen on")
 	flag.StringVar(&certFile, "tlscert", "", "TLS cert file path")
 	flag.StringVar(&keyFile, "tlskey", "", "TLS key file path")
-	flag.Usage = usage;
-	flag.Parse();
+	flag.Usage = usage
+	flag.Parse()
 
 	tcpAddress = flag.Arg(0)
 	if tcpAddress == "" {
-		fmt.Fprintln(os.Stderr, "no address specified")
+		fmt.Fprintln(os.Stderr, "No address specified")
 		os.Exit(1)
 	}
 
 	portString := fmt.Sprintf(":%d", port)
 
-	log.Printf("[INFO] starting server on port %d\n", port)
+	log.Printf("[INFO] Listening on %s\n", portString)
 
 	http.Handle("/", websocket.Handler(relayHandler))
 

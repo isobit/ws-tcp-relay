@@ -1,5 +1,0 @@
-package: .
-import:
-- package: golang.org/x/net
-  subpackages:
-  - websocket

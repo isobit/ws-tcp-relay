@@ -8,7 +8,7 @@ $(BIN): $(SRC) fmt ## Build binary for this platform
 .PHONY: fmt dist clean help
 
 dist: $(SRC) fmt ## Build distribution binaries for all platforms using gox
-	@which gox &> /dev/null || go get github.com/mitchellh/gox
+	@command -v gox 2> /dev/null || go get github.com/mitchellh/gox
 	gox -output "$(DIST_DIR)/$(BIN)_{{.OS}}_{{.Arch}}"
 
 fmt: $(SRC) ## Lint with gofmt

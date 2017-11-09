@@ -13,6 +13,7 @@ import (
 )
 
 var tcpAddress string
+var binaryMode bool
 
 func copyWorker(dst io.Writer, src io.Reader, doneCh chan<- bool) {
 	io.Copy(dst, src)
@@ -24,6 +25,10 @@ func relayHandler(ws *websocket.Conn) {
 	if err != nil {
 		log.Printf("[ERROR] %v \n", err)
 		return
+	}
+
+	if binaryMode {
+		ws.PayloadType = websocket.BinaryFrame
 	}
 
 	doneCh := make(chan bool)
@@ -51,6 +56,8 @@ func main() {
 	flag.UintVar(&port, "port", 4223, "The port to listen on")
 	flag.StringVar(&certFile, "tlscert", "", "TLS cert file path")
 	flag.StringVar(&keyFile, "tlskey", "", "TLS key file path")
+	flag.BoolVar(&binaryMode, "b", false, "Use binary frames instead of text frames")
+	flag.BoolVar(&binaryMode, "binary", false, "Use binary frames instead of text frames")
 	flag.Usage = usage
 	flag.Parse()
 

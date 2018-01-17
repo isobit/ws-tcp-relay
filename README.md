@@ -1,7 +1,7 @@
 # ws-tcp-relay
 [![License MIT](https://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
 
-An extremely simple relay between WebSocket clients and TCP servers. Data
+An extremely simple relay/bridge/proxy between WebSocket clients and TCP servers. Data
 received from WebSocket clients is simply forwarded to the specified TCP
 server, and vice-versa. In other words, it's
 [websocketd](https://github.com/joewalnes/websocketd), but for TCP connections

@@ -1,5 +1,6 @@
 # ws-tcp-relay
 [![License MIT](https://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
+[![Go Report Card](https://goreportcard.com/badge/github.com/isobit/ws-tcp-relay)](https://goreportcard.com/report/github.com/isobit/ws-tcp-relay)
 
 An extremely simple relay/bridge/proxy between WebSocket clients and TCP servers. Data
 received from WebSocket clients is simply forwarded to the specified TCP
